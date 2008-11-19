@@ -102,6 +102,7 @@ stats(PyObject *self, PyObject *args)
   po_message_iterator_t it;
   const char * const * domains;
   const char * filename;
+  PyObject * result;
 	
   if (!PyArg_ParseTuple(args, "s", &filename)) return NULL;
 
@@ -132,7 +133,13 @@ stats(PyObject *self, PyObject *args)
     }
 
   po_file_free(po);
-  return Py_BuildValue("[iiii]", total, translated, fuzzy, untranslated);
+
+  result = Py_BuildValue("[iiii]", total, translated, fuzzy, untranslated);
+  
+  /* reset counters, small hack until we use a struct */
+  total = translated = fuzzy, untranslated = 0;
+
+  return result;
 }
 
 static PyMethodDef POMethods[] = {
