@@ -1,0 +1,5 @@
+Written by
+Christos Trochalakis <yatiohi@ideopolis.gr>
+
+Trivia:
+You 'll neead gettextpo lib to compile the module. You can find it at the gettext-devel package of your distribution.
