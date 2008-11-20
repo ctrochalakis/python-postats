@@ -17,10 +17,7 @@
 #include <Python.h>
 #include <gettext-po.h>
 
-int translated = 0;
-int fuzzy = 0;
-int untranslated = 0;
-int total = 0;
+int translated, fuzzy, untranslated, total;
 
 #define TRUE 1
 #define FALSE 0
@@ -103,7 +100,10 @@ stats(PyObject *self, PyObject *args)
   const char * const * domains;
   const char * filename;
   PyObject * result;
-	
+  
+  /* reset counters, small hack until we use a struct */
+  total = 0; translated = 0; fuzzy = 0; untranslated = 0;
+
   if (!PyArg_ParseTuple(args, "s", &filename)) return NULL;
 
   struct po_xerror_handler gettext_error_handler = {
@@ -134,16 +134,17 @@ stats(PyObject *self, PyObject *args)
 
   po_file_free(po);
 
-  result = Py_BuildValue("[iiii]", total, translated, fuzzy, untranslated);
-  
-  /* reset counters, small hack until we use a struct */
-  total = translated = fuzzy, untranslated = 0;
+  result = Py_BuildValue("{s:i, s:i, s:i, s:i}",
+                         "total", total,
+                         "trans", translated,
+                         "fuzzy", fuzzy,
+                         "untrans", untranslated);
 
   return result;
 }
 
 static PyMethodDef POMethods[] = {
-	{"stats", stats, METH_VARARGS, "Caclulate po statistics."},
+	{"stats", stats, METH_VARARGS, "Calculate po statistics."},
 	{NULL, NULL, 0, NULL}
 };
 
