@@ -1,0 +1,7 @@
+#: contrib/comments/forms.py:126
+#, python-format
+msgid "Watch your mouth! The word %s is not allowed here."
+msgid_plural "Watch your mouth! The words %s are not allowed here."
+msgstr[0] "看住你的嘴！此處不允許 %s 這樣的字眼。"
+msgstr[1] ""
+
