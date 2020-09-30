@@ -2,7 +2,7 @@ Written by
 Christos Trochalakis <yatiohi@ideopolis.gr>
 
 Trivia:
-You 'll neead gettextpo lib to compile the module. You can find it at
+You 'll need gettextpo lib to compile the module. You can find it on
 the gettext-devel package of your distribution.
 
 Install:
@@ -11,4 +11,4 @@ $ python setup.py install
 Build:
 $ python setup.py build
 
-and put build/lib*/po.so at your pythonpath
+and put build/lib*/po.so at your pythonpath.
